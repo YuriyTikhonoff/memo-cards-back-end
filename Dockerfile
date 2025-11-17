@@ -4,8 +4,7 @@ FROM node:25-alpine AS base
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
-
+COPY package*.json yarn.lock ./
 # Development stage
 FROM base AS development
 
@@ -42,7 +41,7 @@ FROM node:25-alpine AS production
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY package*.json yarn.lock ./
 
 # Install only production dependencies
 RUN yarn install --frozen-lockfile --production
