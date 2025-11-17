@@ -1,0 +1,30 @@
+services:
+  # Development service
+  dev:
+    build:
+      context: .
+      target: development
+    container_name: memo-cards-dev
+    ports:
+      - '5001:5001'
+    volumes:
+      - ./src:/app/src
+      - ./test:/app/test
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - PORT=5001
+    restart: unless-stopped
+
+  # Production service
+  prod:
+    build:
+      context: .
+      target: production
+    container_name: memo-cards-prod
+    ports:
+      - '5001:5001'
+    environment:
+      - NODE_ENV=production
+      - PORT=5001
+    restart: unless-stopped
