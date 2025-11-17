@@ -23,7 +23,7 @@ services:
       target: production
     container_name: memo-cards-prod
     ports:
-      - '5001:5001'
+      - '5002:5001'
     environment:
       - NODE_ENV=production
       - PORT=5001
