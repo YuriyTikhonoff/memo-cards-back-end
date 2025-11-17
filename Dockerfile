@@ -33,7 +33,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Build the application
-RUN yarn  build
+RUN yarn build
 
 # Production stage
 FROM node:25-alpine AS production
