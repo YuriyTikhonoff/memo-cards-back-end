@@ -22,7 +22,7 @@ EXPOSE 5001
 ENV NODE_ENV=development
 
 # Start the application in watch mode
-CMD ["npm", "run", "start:dev"]
+CMD ["yarn", "start:dev"]
 
 # Build stage
 FROM base AS builder
@@ -34,7 +34,7 @@ RUN yarn install --frozen-lockfile
 COPY . .
 
 # Build the application
-RUN npm run build
+RUN yarn  build
 
 # Production stage
 FROM node:25-alpine AS production
