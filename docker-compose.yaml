@@ -1,4 +1,25 @@
 services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: memo-cards-db
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: memo_cards
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   # Development service
   dev:
     build:
@@ -14,6 +35,14 @@ services:
     environment:
       - NODE_ENV=development
       - PORT=5001
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_NAME=memo_cards
+    depends_on:
+      db:
+        condition: service_healthy
     restart: unless-stopped
 
   # Production service
@@ -23,8 +52,19 @@ services:
       target: production
     container_name: memo-cards-prod
     ports:
-      - '5002:5001'
+      - '5001:5001'
     environment:
       - NODE_ENV=production
       - PORT=5001
+      - DATABASE_HOST=db
+      - DATABASE_PORT=5432
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+      - DATABASE_NAME=memo_cards
+    depends_on:
+      db:
+        condition: service_healthy
     restart: unless-stopped
+
+volumes:
+  postgres_data:
