@@ -21,7 +21,7 @@ model MemoCard {
   category                 Category? @relation(fields: [categoryId], references: [id])
   categoryId               String?
   level                    Int      @default(0)
-  lastPracticeTimestamp    String   @default("0")
+  lastPracticeTimestamp    DateTime   @default(dbgenerated("CURRENT_TIMESTAMP")) @db.Timestamptz
   createdAtTimestamp       DateTime   @default(dbgenerated("CURRENT_TIMESTAMP")) @db.Timestamptz
   useReversedDefaultView   Boolean  @default(false)
 }
