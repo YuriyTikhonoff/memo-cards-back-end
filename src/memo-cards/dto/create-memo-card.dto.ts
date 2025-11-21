@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import {
-  IsString,
-  IsOptional,
   IsBoolean,
   IsInt,
-  Min,
+  IsOptional,
+  IsString,
   Max,
+  Min,
 } from 'class-validator';
 
 export class CreateMemoCardDto {

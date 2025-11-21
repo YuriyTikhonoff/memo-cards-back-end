@@ -14,6 +14,14 @@ import { MemoCardsService } from './memo-cards.service';
 import { CreateMemoCardDto } from './dto/create-memo-card.dto';
 import { UpdateMemoCardDto } from './dto/update-memo-card.dto';
 
+// POST /memo-cards - Create a memo card
+// GET /memo-cards - Get all memo cards (optionally filter by ?categoryId=xxx)
+// GET /memo-cards/practice?limit=10 - Get cards due for practice
+// GET /memo-cards/:id - Get one memo card
+// PATCH /memo-cards/:id - Update a memo card
+// PATCH /memo-cards/:id/practice - Update practice timestamp and level
+// DELETE /memo-cards/:id - Delete a memo card
+
 @Controller('memo-cards')
 export class MemoCardsController {
   constructor(private readonly memoCardsService: MemoCardsService) {}
