@@ -6,11 +6,11 @@ services:
     env_file:
       - .env
     environment:
-      POSTGRES_DB: memo_cards
+      POSTGRES_DB: ${POSTGRES_DB_NAME}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - '5432:5432'
+      - '${DB_EXPOSED_PORT}:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
@@ -37,9 +37,9 @@ services:
       - PORT=5001
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
+      - DATABASE_USER=${POSTGRES_USER}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-      - DATABASE_NAME=memo_cards
+      - DATABASE_NAME=${POSTGRES_DB_NAME}
     depends_on:
       db:
         condition: service_healthy
@@ -58,9 +58,9 @@ services:
       - PORT=5001
       - DATABASE_HOST=db
       - DATABASE_PORT=5432
-      - DATABASE_USER=postgres
+      - DATABASE_USER=${POSTGRES_USER}
       - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
-      - DATABASE_NAME=memo_cards
+      - DATABASE_NAME=${POSTGRES_DB_NAME}
     depends_on:
       db:
         condition: service_healthy

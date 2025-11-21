@@ -12,3 +12,38 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model MemoCard {
+  id                       String   @id @default(uuid())
+  title                    String
+  front                    String
+  back                     String
+  category                 Category? @relation(fields: [categoryId], references: [id])
+  categoryId               String?
+  level                    Int      @default(0)
+  lastPracticeTimestamp    DateTime   @default(dbgenerated("CURRENT_TIMESTAMP")) @db.Timestamptz
+  createdAtTimestamp       DateTime   @default(dbgenerated("CURRENT_TIMESTAMP")) @db.Timestamptz
+  useReversedDefaultView   Boolean  @default(false)
+}
+
+model Category {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime   @default(dbgenerated("CURRENT_TIMESTAMP")) @db.Timestamptz
+  // Foreign key field - stores the ID of the parent category
+  parentCategoryId String?
+  
+  // Relation field - references the parent Category
+  // @relation("CategoryToCategory") - names the relation to distinguish self-referential relationships
+  // fields: [parentCategoryId] - specifies which field holds the foreign key
+  // references: [id] - points to the id field of the parent Category
+  parentCategory   Category? @relation("CategoryToCategory", fields: [parentCategoryId], references: [id])
+  
+  // Back-relation - lists all child categories (inverse of parentCategory)
+  // Must use the same relation name "CategoryToCategory"
+  categories Category[] @relation("CategoryToCategory")
+  
+  // One-to-many relation with MemoCard
+  // Lists all memo cards belonging to this category
+  memoCards MemoCard[]
+}
