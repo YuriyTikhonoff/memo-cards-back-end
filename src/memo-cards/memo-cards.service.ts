@@ -3,6 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 //import { PrismaService } from '../prisma/prisma.service';
 import { CreateMemoCardDto } from './dto/create-memo-card.dto';
 import { UpdateMemoCardDto } from './dto/update-memo-card.dto';
+import { validateLimint } from '../utils/validateLimint';
 
 @Injectable()
 export class MemoCardsService {
@@ -80,6 +81,7 @@ export class MemoCardsService {
   }
 
   async findDueForPractice(limit: number = 10) {
+    validateLimint(limit);
     // TODO: implement actual retrieval logic
     // const now = new Date();
     // return this.prisma.memoCard.findMany({
