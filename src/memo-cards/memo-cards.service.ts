@@ -10,6 +10,7 @@ export class MemoCardsService {
   constructor() {}
 
   async create(createMemoCardDto: CreateMemoCardDto) {
+    // TODO: implement actual creation logic
     // return this.prisma.memoCard.create({
     //   data: createMemoCardDto,
     //   include: { category: true },
@@ -19,6 +20,7 @@ export class MemoCardsService {
 
   async findAll(categoryId?: string) {
     return Promise.resolve([]);
+    // TODO: implement actual retrieval logic
     // return this.prisma.memoCard.findMany({
     //   where: categoryId ? { categoryId } : undefined,
     //   include: { category: true },
@@ -27,6 +29,7 @@ export class MemoCardsService {
   }
 
   async findOne(id: string) {
+    // TODO: implement actual retrieval logic
     // const memoCard = await this.prisma.memoCard.findUnique({
     //   where: { id },
     //   include: { category: true },
@@ -39,6 +42,7 @@ export class MemoCardsService {
   }
 
   async update(id: string, updateMemoCardDto: UpdateMemoCardDto) {
+    // TODO: implement actual update logic
     // try {
     //   return await this.prisma.memoCard.update({
     //     where: { id },
@@ -53,6 +57,7 @@ export class MemoCardsService {
 
   async remove(id: string) {
     return Promise.resolve(null);
+    // TODO: implement actual deletion logic
     // try {
     //   return await this.prisma.memoCard.delete({
     //     where: { id },
@@ -64,6 +69,7 @@ export class MemoCardsService {
 
   async updatePracticeTimestamp(id: string, newLevel: number) {
     return Promise.resolve(null);
+    // TODO: implement actual update practice timestamp logic
     // return this.prisma.memoCard.update({
     //   where: { id },
     //   data: {
@@ -74,6 +80,7 @@ export class MemoCardsService {
   }
 
   async findDueForPractice(limit: number = 10) {
+    // TODO: implement actual retrieval logic
     // const now = new Date();
     // return this.prisma.memoCard.findMany({
     //   where: {
