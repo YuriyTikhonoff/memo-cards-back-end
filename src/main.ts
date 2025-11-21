@@ -1,6 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { RESERVED_VALUE_PORT } from './constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,7 +14,7 @@ async function bootstrap() {
     }),
   );
 
-  const port = process.env.PORT || 5001;
+  const port = process.env.PORT || RESERVED_VALUE_PORT;
   await app.listen(port);
   console.log(`Application is running on: http://localhost:${port}`);
 }
