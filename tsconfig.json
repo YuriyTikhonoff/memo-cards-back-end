@@ -7,17 +7,19 @@
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "isolatedModules": true,
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "noFallthroughCasesInSwitch": false,
     "noImplicitAny": false,
     "outDir": "./dist",
     "removeComments": true,
+    "resolvePackageJsonExports": true,
     "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
     "strictBindCallApply": false,
     "strictNullChecks": true,
-    "target": "ES2021"
+    "target": "ES2023"
   }
 }
