@@ -1,32 +1,32 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable, NotFoundException } from '@nestjs/common';
-//import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateMemoCardDto } from './dto/create-memo-card.dto';
 import { UpdateMemoCardDto } from './dto/update-memo-card.dto';
 import { validateLimint } from '../utils/validateLimint';
 
 @Injectable()
 export class MemoCardsService {
-  // constructor(private prisma: PrismaService) {}
-  constructor() {}
+  constructor(private prisma: PrismaService) {}
+  // constructor() {}
 
   async create(createMemoCardDto: CreateMemoCardDto) {
     // TODO: implement actual creation logic
-    // return this.prisma.memoCard.create({
-    //   data: createMemoCardDto,
-    //   include: { category: true },
-    // });
-    return Promise.resolve(null);
+    return this.prisma.memoCard.create({
+      data: createMemoCardDto,
+      include: { category: true },
+    });
+    // return Promise.resolve(null);
   }
 
   async findAll(categoryId?: string) {
-    return Promise.resolve([]);
+    // return Promise.resolve([]);
     // TODO: implement actual retrieval logic
-    // return this.prisma.memoCard.findMany({
-    //   where: categoryId ? { categoryId } : undefined,
-    //   include: { category: true },
-    //   orderBy: { createdAtTimestamp: 'desc' },
-    // });
+    return this.prisma.memoCard.findMany({
+      where: categoryId ? { categoryId } : undefined,
+      include: { category: true },
+      orderBy: { createdAtTimestamp: 'desc' },
+    });
   }
 
   async findOne(id: string) {
