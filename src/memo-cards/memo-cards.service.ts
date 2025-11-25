@@ -20,13 +20,29 @@ export class MemoCardsService {
   }
 
   async findAll(categoryId?: string) {
-    // return Promise.resolve([]);
+    await this.prisma.$connect();
+    console.log('Connected to the database successfully.');
+    try {
+      await this.prisma.$queryRaw`SELECT 1`;
+      console.log('Checked database connection with raw query successfully.');
+    } catch (error) {
+      console.error('Error executing raw query:', error);
+      if (error instanceof Error) {
+        console.error('Error message:', error.message);
+      }
+    }
+    return Promise.resolve([]);
     // TODO: implement actual retrieval logic
-    return this.prisma.memoCard.findMany({
-      where: categoryId ? { categoryId } : undefined,
-      include: { category: true },
-      orderBy: { createdAtTimestamp: 'desc' },
-    });
+    // try {
+    //   return await this.prisma.memoCard.findFirst();
+    //   // where: categoryId ? { categoryId } : undefined,
+    //   // include: { category: true },
+    //   // orderBy: { createdAtTimestamp: 'desc' },
+    //   //});
+    // } catch (error) {
+    //   console.error('Error fetching memo cards:', error);
+    //   throw error;
+    // }
   }
 
   async findOne(id: string) {
