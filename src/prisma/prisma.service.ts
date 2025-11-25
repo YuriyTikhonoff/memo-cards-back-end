@@ -7,6 +7,9 @@ import 'dotenv/config';
 export class PrismaService extends PrismaClient implements OnModuleInit {
   constructor() {
     const databaseUrl = process.env.HOSTED_DATABASE_URL;
+    if (!databaseUrl) {
+      throw new Error('Environment variable HOSTED_DATABASE_URL must be set');
+    }
     const pool = new PrismaPg({
       connectionString: databaseUrl,
     });
