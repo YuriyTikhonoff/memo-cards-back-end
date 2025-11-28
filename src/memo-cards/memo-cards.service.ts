@@ -4,7 +4,6 @@ import { PrismaService } from '../prisma/prisma.service';
 import { CreateMemoCardDto } from './dto/create-memo-card.dto';
 import { UpdateMemoCardDto } from './dto/update-memo-card.dto';
 import { validateLimint } from '../utils/validateLimint';
-
 @Injectable()
 export class MemoCardsService {
   constructor(private prisma: PrismaService) {}
@@ -17,14 +16,12 @@ export class MemoCardsService {
   }
 
   async findAll(categoryId?: string) {
-    // return Promise.resolve([]);
-    // TODO: implement actual retrieval logic
     try {
-      return await this.prisma.memoCard.findMany();
-      // where: categoryId ? { categoryId } : undefined,
-      // include: { category: true },
-      // orderBy: { createdAtTimestamp: 'desc' },
-      //});
+      return await this.prisma.memoCard.findMany({
+        where: categoryId ? { categoryId } : undefined,
+        include: { category: true },
+        orderBy: { createdAtTimestamp: 'desc' },
+      });
     } catch (error) {
       console.error('Error fetching memo cards:', error);
       throw error;
@@ -32,19 +29,28 @@ export class MemoCardsService {
   }
 
   async findOne(id: string) {
-    // TODO: implement actual retrieval logic
-    // const memoCard = await this.prisma.memoCard.findUnique({
-    //   where: { id },
-    //   include: { category: true },
-    // });
-    // if (!memoCard) {
-    //   throw new NotFoundException(`Memo card with ID ${id} not found`);
-    // }
-    // return memoCard;
-    return Promise.resolve(null);
+    try {
+      const memoCard = await this.prisma.memoCard.findUnique({
+        where: { id },
+        include: { category: true },
+      });
+      if (!memoCard) {
+        throw new NotFoundException(`Memo card with ID ${id} not found`);
+      }
+      return memoCard;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      console.error('Error fetching memo card:', error);
+      throw error;
+    }
   }
 
-  async update(id: string, updateMemoCardDto: UpdateMemoCardDto) {
+  async update(
+    id: string,
+    updateMemoCardDto: UpdateMemoCardDto,
+  ): Promise<unknown> {
     // TODO: implement actual update logic
     // try {
     //   return await this.prisma.memoCard.update({
@@ -58,7 +64,7 @@ export class MemoCardsService {
     return Promise.resolve(null);
   }
 
-  async remove(id: string) {
+  async remove(id: string): Promise<unknown> {
     return Promise.resolve(null);
     // TODO: implement actual deletion logic
     // try {
@@ -70,7 +76,10 @@ export class MemoCardsService {
     // }
   }
 
-  async updatePracticeTimestamp(id: string, newLevel: number) {
+  async updatePracticeTimestamp(
+    id: string,
+    newLevel: number,
+  ): Promise<unknown> {
     return Promise.resolve(null);
     // TODO: implement actual update practice timestamp logic
     // return this.prisma.memoCard.update({
