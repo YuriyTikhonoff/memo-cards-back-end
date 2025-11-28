@@ -29,14 +29,22 @@ export class MemoCardsService {
   }
 
   async findOne(id: string) {
-    const memoCard = await this.prisma.memoCard.findUnique({
-      where: { id },
-      include: { category: true },
-    });
-    if (!memoCard) {
-      throw new NotFoundException(`Memo card with ID ${id} not found`);
+    try {
+      const memoCard = await this.prisma.memoCard.findUnique({
+        where: { id },
+        include: { category: true },
+      });
+      if (!memoCard) {
+        throw new NotFoundException(`Memo card with ID ${id} not found`);
+      }
+      return memoCard;
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw error;
+      }
+      console.error('Error fetching memo card:', error);
+      throw error;
     }
-    return memoCard;
   }
 
   async update(
