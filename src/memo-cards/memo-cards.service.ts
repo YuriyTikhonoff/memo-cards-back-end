@@ -29,7 +29,6 @@ export class MemoCardsService {
   }
 
   async findOne(id: string) {
-    // TODO: implement actual retrieval logic
     const memoCard = await this.prisma.memoCard.findUnique({
       where: { id },
       include: { category: true },
