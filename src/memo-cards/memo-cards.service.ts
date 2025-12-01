@@ -51,7 +51,6 @@ export class MemoCardsService {
     id: string,
     updateMemoCardDto: UpdateMemoCardDto,
   ): Promise<unknown> {
-    // TODO: implement actual update logic
     try {
       return await this.prisma.memoCard.update({
         where: { id },
@@ -61,12 +60,9 @@ export class MemoCardsService {
     } catch {
       throw new NotFoundException(`Memo card with ID ${id} not found`);
     }
-    // return Promise.resolve(null);
   }
 
   async remove(id: string): Promise<unknown> {
-    // return Promise.resolve(null);
-    // TODO: implement actual deletion logic
     try {
       return await this.prisma.memoCard.delete({
         where: { id },
