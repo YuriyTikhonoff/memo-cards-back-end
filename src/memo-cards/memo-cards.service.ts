@@ -51,29 +51,27 @@ export class MemoCardsService {
     id: string,
     updateMemoCardDto: UpdateMemoCardDto,
   ): Promise<unknown> {
-    // TODO: implement actual update logic
-    // try {
-    //   return await this.prisma.memoCard.update({
-    //     where: { id },
-    //     data: updateMemoCardDto,
-    //     include: { category: true },
-    //   });
-    // } catch {
-    //   throw new NotFoundException(`Memo card with ID ${id} not found`);
-    // }
-    return Promise.resolve(null);
+    try {
+      return await this.prisma.memoCard.update({
+        where: { id },
+        data: updateMemoCardDto,
+        include: { category: true },
+      });
+    } catch {
+      // TODO: distinguish between not found and other errors based on mapping Prisma error code to HTTP status codes
+      throw new NotFoundException(`Memo card with ID ${id} not found`);
+    }
   }
 
   async remove(id: string): Promise<unknown> {
-    return Promise.resolve(null);
-    // TODO: implement actual deletion logic
-    // try {
-    //   return await this.prisma.memoCard.delete({
-    //     where: { id },
-    //   });
-    // } catch {
-    //   throw new NotFoundException(`Memo card with ID ${id} not found`);
-    // }
+    try {
+      return await this.prisma.memoCard.delete({
+        where: { id },
+      });
+    } catch {
+      // TODO: distinguish between not found and other errors based on mapping Prisma error code to HTTP status codes
+      throw new NotFoundException(`Memo card with ID ${id} not found`);
+    }
   }
 
   async updatePracticeTimestamp(
