@@ -58,6 +58,7 @@ export class MemoCardsService {
         include: { category: true },
       });
     } catch {
+      // TODO: distinguish between not found and other errors based on maping Prisma error code to HTTP status codes
       throw new NotFoundException(`Memo card with ID ${id} not found`);
     }
   }
@@ -68,6 +69,7 @@ export class MemoCardsService {
         where: { id },
       });
     } catch {
+      // TODO: distinguish between not found and other errors based on maping Prisma error code to HTTP status codes
       throw new NotFoundException(`Memo card with ID ${id} not found`);
     }
   }
