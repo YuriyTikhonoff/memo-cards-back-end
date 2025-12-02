@@ -13,6 +13,7 @@ import {
 import { MemoCardsService } from './memo-cards.service';
 import { CreateMemoCardDto } from './dto/create-memo-card.dto';
 import { UpdateMemoCardDto } from './dto/update-memo-card.dto';
+import { ROUTES } from 'src/constants';
 
 // POST /memo-cards - Create a memo card
 // GET /memo-cards - Get all memo cards (optionally filter by ?categoryId=xxx)
@@ -22,7 +23,7 @@ import { UpdateMemoCardDto } from './dto/update-memo-card.dto';
 // PATCH /memo-cards/:id/practice - Update practice timestamp and level
 // DELETE /memo-cards/:id - Delete a memo card
 
-@Controller('memo-cards')
+@Controller(ROUTES.MEMO_CARDS)
 export class MemoCardsController {
   constructor(private readonly memoCardsService: MemoCardsService) {}
 

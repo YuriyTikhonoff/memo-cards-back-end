@@ -4,12 +4,14 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { MemoCardsModule } from './memo-cards/memo-cards.module';
+import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     PrismaModule,
     MemoCardsModule,
+    CategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
