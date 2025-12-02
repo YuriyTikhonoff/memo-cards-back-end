@@ -1,6 +1,8 @@
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CategoryDTO } from './dto/category.dto';
+import { Injectable } from '@nestjs/common';
 
+@Injectable()
 export class CategoriesService {
   constructor(private readonly prismaService: PrismaService) {}
   async getCategories(): Promise<CategoryDTO[]> {
@@ -12,7 +14,8 @@ export class CategoriesService {
           { id: '550e8400-e29b-41d4-a716-446655440002', name: 'History' },
           { id: '550e8400-e29b-41d4-a716-446655440003', name: 'Language' },
         ]);
-      }, 500);
-    }); //this.prismaService.category.findMany();
+      }, 1000);
+    });
+    // return await this.prismaService.category.findMany();
   }
 }
