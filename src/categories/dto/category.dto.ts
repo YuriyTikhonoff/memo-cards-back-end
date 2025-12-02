@@ -1,0 +1,13 @@
+import { IsOptional, IsString } from 'class-validator';
+
+export class CategoryDTO {
+  @IsString()
+  id!: string;
+
+  @IsString()
+  name!: string;
+
+  @IsString()
+  @IsOptional()
+  parentCategoryName?: string;
+}
