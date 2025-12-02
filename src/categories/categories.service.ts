@@ -1,11 +1,11 @@
 import { PrismaService } from 'src/prisma/prisma.service';
-import { CategoryDTO } from './dto/category.dto';
+import { CategoryDto } from './dto/category.dto';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CategoriesService {
   constructor(private readonly prismaService: PrismaService) {}
-  async getCategories(): Promise<CategoryDTO[]> {
+  async getCategories(): Promise<CategoryDto[]> {
     return await new Promise((resolve) => {
       setTimeout(() => {
         resolve([

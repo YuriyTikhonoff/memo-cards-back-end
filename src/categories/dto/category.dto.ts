@@ -1,6 +1,6 @@
 import { IsOptional, IsString } from 'class-validator';
 
-export class CategoryDTO {
+export class CategoryDto {
   @IsString()
   id!: string;
 
