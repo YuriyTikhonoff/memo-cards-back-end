@@ -1,6 +1,6 @@
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CategoryDto } from './dto/category.dto';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
 @Injectable()
 export class CategoriesService {
@@ -15,8 +15,11 @@ export class CategoriesService {
     });
   }
   async deleteCategory(id: string): Promise<void> {
-    await this.prismaService.category.delete({
+    const deleted = await this.prismaService.category.delete({
       where: { id },
     });
+    if (!deleted) {
+      throw new NotFoundException(`Category with id ${id} not found`);
+    }
   }
 }
