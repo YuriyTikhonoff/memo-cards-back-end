@@ -39,7 +39,7 @@ export class MemoCardsController {
 
   @Get('practice')
   findDueForPractice(@Query('limit') limit?: string) {
-    const limitNum = limit ? parseInt(limit, 10) : 10;
+    const limitNum = limit ? Number.parseInt(limit, 10) : 10;
     return this.memoCardsService.findDueForPractice(limitNum);
   }
 
