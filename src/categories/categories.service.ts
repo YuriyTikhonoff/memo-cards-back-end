@@ -23,7 +23,7 @@ export class CategoriesService {
     } catch (error: unknown) {
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error?.code === 'P2025'
+        error.code === 'P2025'
       ) {
         throw new NotFoundException(`Category with id ${id} not found`);
       }
