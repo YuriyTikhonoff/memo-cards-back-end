@@ -33,7 +33,6 @@ export class CategoriesController {
   }
 
   @Put(':id')
-  @HttpCode(HttpStatus.NO_CONTENT)
   updateCategory(
     @Param('id') id: string,
     @Body() updateCategoryPayload: CreateCategoryDto,
