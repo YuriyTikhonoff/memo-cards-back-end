@@ -30,4 +30,20 @@ export class CategoriesService {
       throw error;
     }
   }
+  async updateCategory(id: string, name: string): Promise<CategoryDto> {
+    try {
+      return await this.prismaService.category.update({
+        where: { id },
+        data: { name },
+      });
+    } catch (error: unknown) {
+      if (
+        error instanceof Prisma.PrismaClientKnownRequestError &&
+        error.code === 'P2025'
+      ) {
+        throw new NotFoundException(`Category with id ${id} not found`);
+      }
+      throw error;
+    }
+  }
 }

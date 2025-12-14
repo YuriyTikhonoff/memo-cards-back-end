@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Param,
   Post,
+  Put,
 } from '@nestjs/common';
 import { ROUTES } from 'src/constants';
 import { CategoriesService } from './categories.service';
@@ -29,5 +30,16 @@ export class CategoriesController {
   @HttpCode(HttpStatus.NO_CONTENT)
   deleteCategory(@Param('id') id: string) {
     return this.categoriesService.deleteCategory(id);
+  }
+
+  @Put(':id')
+  updateCategory(
+    @Param('id') id: string,
+    @Body() updateCategoryPayload: CreateCategoryDto,
+  ) {
+    return this.categoriesService.updateCategory(
+      id,
+      updateCategoryPayload.name,
+    );
   }
 }
