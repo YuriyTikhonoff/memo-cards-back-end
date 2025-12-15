@@ -24,7 +24,7 @@ export class CategoriesService {
     } catch (error: unknown) {
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === PRISMA_ERROR_CODES.RECORD_NOT_FOUND
+        error.code === PRISMA_ERROR_CODES.RECORD_NOT_FOUND_TO_UPDATE_OR_DELETE
       ) {
         throw new NotFoundException(`Category with id ${id} not found`);
       }
@@ -40,7 +40,7 @@ export class CategoriesService {
     } catch (error: unknown) {
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === PRISMA_ERROR_CODES.RECORD_NOT_FOUND
+        error.code === PRISMA_ERROR_CODES.RECORD_NOT_FOUND_TO_UPDATE_OR_DELETE
       ) {
         throw new NotFoundException(`Category with id ${id} not found`);
       }
