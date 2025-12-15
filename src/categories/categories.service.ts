@@ -2,6 +2,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { CategoryDto } from './dto/category.dto';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { Prisma } from 'generated/client';
+import { PRISMA_ERROR_CODES } from 'src/constants';
 
 @Injectable()
 export class CategoriesService {
@@ -23,7 +24,7 @@ export class CategoriesService {
     } catch (error: unknown) {
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
+        error.code === PRISMA_ERROR_CODES.RECORD_NOT_FOUND_TO_UPDATE_OR_DELETE
       ) {
         throw new NotFoundException(`Category with id ${id} not found`);
       }
@@ -39,7 +40,7 @@ export class CategoriesService {
     } catch (error: unknown) {
       if (
         error instanceof Prisma.PrismaClientKnownRequestError &&
-        error.code === 'P2025'
+        error.code === PRISMA_ERROR_CODES.RECORD_NOT_FOUND_TO_UPDATE_OR_DELETE
       ) {
         throw new NotFoundException(`Category with id ${id} not found`);
       }

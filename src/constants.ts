@@ -4,3 +4,9 @@ export const ROUTES = {
   CATEGORIES: 'categories',
   MEMO_CARDS: 'memo-cards',
 };
+
+export const PRISMA_ERROR_CODES = {
+  RECORD_NOT_FOUND_TO_UPDATE_OR_DELETE: 'P2025',
+  UNIQUE_CONSTRAINT_VIOLATION: 'P2002',
+  RECORD_NOT_FOUND: 'P2001',
+};
