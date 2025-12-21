@@ -6,7 +6,7 @@ import { UpdateMemoCardDto } from './dto/update-memo-card.dto';
 import { validateLimint } from '../utils/validateLimint';
 @Injectable()
 export class MemoCardsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async create(createMemoCardDto: CreateMemoCardDto) {
     return this.prisma.memoCard.create({
