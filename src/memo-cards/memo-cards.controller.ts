@@ -9,6 +9,7 @@ import {
   Query,
   HttpCode,
   HttpStatus,
+  Put,
 } from '@nestjs/common';
 import { MemoCardsService } from './memo-cards.service';
 import { CreateMemoCardDto } from './dto/create-memo-card.dto';
@@ -48,7 +49,7 @@ export class MemoCardsController {
     return this.memoCardsService.findOne(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   update(
     @Param('id') id: string,
     @Body() updateMemoCardDto: UpdateMemoCardDto,
